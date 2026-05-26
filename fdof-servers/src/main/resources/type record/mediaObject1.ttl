@@ -1,0 +1,10 @@
+dcat:Dataset a owl:Class ;
+    dct:title "Dataset"@en ;
+    fdof:supports :operation1, :operation2 .
+
+fdof:FAIRMediaObject a owl:Class ;
+    dct:title "FAIR Media Object"@en ;
+    fdof:supports :operation1, :operation3 .
+
+fdof:materializes a owl:ObjectProperty ;
+    rdfs:domain fdof:FAIRMediaObject .

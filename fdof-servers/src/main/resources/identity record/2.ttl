@@ -1,0 +1,7 @@
+:2 rdf:type dcat:Distribution, fdof:FAIRMediaObject ;
+    fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/text/csv> ;
+    dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> ;
+    fdof:gupri "https://w3id.org/fdof/fois23-paper/ex1/amazonTop50Csv" ;
+    dct:title "CSV Distribution of the Amazon Top 50 Bestselling Books Dataset"@en ;
+    dcat:byteSize "51161"^^xsd:int ;
+    dcat:downloadURL <https://www.kaggle.com/datasets/sootersaalu/amazon-top-50-bestselling-books-2009-2019/download> ;

@@ -1,0 +1,11 @@
+@prefix : <https://localhost:7070/> .
+
+:idRecord1 {
+    :idRecord1 a fdof:IdentifierRecord ;
+               fdof:isMetadataOf :mediaObject1 .
+
+    :mediaObject1 rdf:type dcat:Distribution, fdof:FAIRMediaObject ;
+       fdof:gupri "https://localhost:7070/mediaObject1" ;
+       fdof:materializes :informationObject1 ;
+       fdof:hasMetadata :metadataRecord1, :metadataRecord2 .
+}

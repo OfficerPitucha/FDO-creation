@@ -1,0 +1,27 @@
+:metadataRecord1 {
+    :metadataRecord1 a fdof:MetadataRecord ;
+               fdof:isMetadataOf :mediaObject1 .
+
+    :mediaObject1 rdf:type dcat:Distribution, fdof:FAIRMediaObject ;
+       fdof:gupri "https://localhost:7070/mediaObject1" ;
+       fdof:materializes :informationObject1 ;
+       fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/text/csv> ;
+       dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> ;
+       dct:title "CSV Distribution of the Amazon Top 50 Bestselling Books Dataset"@en ;
+       dcat:byteSize "51161"^^xsd:int ;
+       dcat:downloadURL <https://localhost:7070/mediaObject1> ;
+}
+
+:metadataRecord2 {
+    :metadataRecord2 a fdof:MetadataRecord ;
+               fdof:isMetadataOf :mediaObject1 .
+
+    :mediaObject1 rdf:type dcat:Distribution, fdof:FAIRMediaObject ;
+       fdof:gupri "https://localhost:7070/mediaObject1" ;
+       fdof:materializes :informationObject1 ;
+       fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/text/csv> ;
+       dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> ;
+       dct:title "CSV Distribution of the Amazon Top 50 Bestselling Books Dataset"@en ;
+       dcat:byteSize "51161"^^xsd:int ;
+       dcat:downloadURL <https://localhost:7070/mediaObject1> ;
+}
