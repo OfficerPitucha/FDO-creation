@@ -1,0 +1,119 @@
+# SHACL shapes for FDO graphs produced by the FDO Creation Pipeline.
+
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix fdof:  <https://w3id.org/fdof/ontology#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix :      <https://example.org/fdo/shapes#> .
+
+# every FDO must have exactly one GUPRI
+:FAIRDigitalObjectShape
+    a sh:NodeShape ;
+    sh:targetClass fdof:FAIRDigitalObject ;
+    sh:property [
+        sh:path fdof:gupri ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:message "Every FAIRDigitalObject must have exactly one fdof:gupri literal." ;
+    ] .
+
+# FAIRInformationObject must be materialized by >=1 media object
+
+:FAIRInformationObjectShape
+    a sh:NodeShape ;
+    sh:targetClass fdof:FAIRInformationObject ;
+    sh:property [
+        sh:path fdof:isMaterializedBy ;
+        sh:minCount 1 ;
+        sh:class fdof:FAIRMediaObject ;
+        sh:message "Every FAIRInformationObject must be materialized by at least one FAIRMediaObject." ;
+    ] ;
+    # (C) minimum: an FDIO carries a type reference
+    sh:property [
+        sh:path fdof:hasInformationObjectType ;
+        sh:minCount 1 ;
+        sh:class fdof:FAIRInformationObjectType ;
+        sh:message "Every FAIRInformationObject must reference a FAIRInformationObjectType." ;
+    ] .
+
+# FAIRMediaObject: must declare exactly one encoding format
+# FDOF-O: fdof:hasEncodingFormat has domain fdof:FAIRMediaObject.
+:FAIRMediaObjectShape
+    a sh:NodeShape ;
+    sh:targetClass fdof:FAIRMediaObject ;
+    sh:property [
+        sh:path fdof:hasEncodingFormat ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "Every FAIRMediaObject must declare exactly one fdof:hasEncodingFormat (an IRI, e.g. an IANA media type)." ;
+    ] .
+
+# FAIRMetadataRecord: must point at the object it describes
+# FDOF-O: MetadataRecord subClassOf (isMetadataOf some DigitalObject).
+:FAIRMetadataRecordShape
+    a sh:NodeShape ;
+    sh:targetClass fdof:FAIRMetadataRecord ;
+    sh:property [
+        sh:path fdof:isMetadataOf ;
+        sh:minCount 1 ;
+        sh:class fdof:DigitalObject ;
+        sh:message "Every FAIRMetadataRecord must be fdof:isMetadataOf at least one DigitalObject." ;
+    ] .
+
+# every non-FMR FDIO must have an FMR
+:NonFmrInfoObjectHasMetadataShape
+    a sh:NodeShape ;
+    # Target: FAIRInformationObjects that are NOT FAIRMetadataRecords.
+    # A plain sh:targetClass would also catch FMRs (FMR subClassOf FIO),
+    # and a shape-level sh:not would wrongly flag the FMRs themselves.
+    # A SPARQL target selects exactly the intended set.
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX fdof: <https://w3id.org/fdof/ontology#>
+            PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            SELECT ?this WHERE {
+                ?this rdf:type fdof:FAIRInformationObject .
+                FILTER NOT EXISTS { ?this rdf:type fdof:FAIRMetadataRecord }
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath fdof:isMetadataOf ] ;
+        sh:qualifiedValueShape [ sh:class fdof:FAIRMetadataRecord ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:message "Every non-metadata FAIRInformationObject must be described by at least one FAIRMetadataRecord (page-9 constraint)." ;
+    ] .
+
+# Descriptive-metadata minimums inside an FMR's named graph
+# Minimum descriptive set per the spec: title + license.
+:DescribedObjectMinimumShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX fdof: <https://w3id.org/fdof/ontology#>
+            PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            SELECT ?this WHERE {
+                ?this rdf:type fdof:FAIRInformationObject .
+                FILTER NOT EXISTS { ?this rdf:type fdof:FAIRMetadataRecord }
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+        sh:message "Every non-metadata FAIRInformationObject should carry a dct:title in its metadata record." ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path dct:license ;
+        sh:minCount 1 ;
+        sh:message "Every non-metadata FAIRInformationObject should carry a dct:license in its metadata record." ;
+        sh:severity sh:Warning ;
+    ] .

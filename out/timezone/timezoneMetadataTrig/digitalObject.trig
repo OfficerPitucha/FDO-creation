@@ -1,0 +1,80 @@
+@prefix : <https://example.org/fdo/timezone#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:timezoneMsExcelMetadata {
+    :timezoneMsExcelMetadata fdof:isMetadataOf :timezoneMsExcel .
+
+    :timezoneMsExcel a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "MsExcel Distribution of the Timezone"@en ;
+        dcat:byteSize "16249"^^xsd:int ;
+        dcat:downloadURL <https://example.org/fdo/timezone/timezone.csv> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/application/vnd.ms-excel> ;
+        fdof:gupri "https://example.org/fdo/timezone/timezoneMsExcel"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/vnd.ms-excel> .
+}
+
+:timezoneMetadata {
+    :timezoneMetadata fdof:isMetadataOf :timezone .
+
+    :timezone a dcat:Dataset,
+            fdof:FAIRInformationObject ;
+        dct:identifier "https://example.org/fdo/timezone/timezone" ;
+        dct:issued "2026-06-14"^^xsd:date ;
+        dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+        dct:title "Timezone" ;
+        dcat:distribution :timezoneMsExcel ;
+        fdof:gupri "https://example.org/fdo/timezone/timezone"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :timezoneMsExcel .
+}
+
+:timezoneMetadataTrigMetadata {
+    :timezoneMetadataTrigMetadata fdof:isMetadataOf :timezoneMetadataTrig .
+
+    :timezoneMetadataTrig a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "TriG Distribution of the Metadata Records Related to the Timezone FAIR Digital Object"@en ;
+        dcat:downloadURL <https://example.org/fdo/timezone/timezoneMetadata.trig> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/application/trig> ;
+        fdof:gupri "https://example.org/fdo/timezone/timezoneMetadataTrig"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+}
+
+:skeleton {
+    :timezoneMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/timezone/timezoneMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :timezoneMetadataTrig ;
+        fdof:isMetadataOf :timezone .
+
+    :timezoneMetadataTrigMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/timezone/timezoneMetadataTrigMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :timezoneMetadataTrig ;
+        fdof:isMetadataOf :timezoneMetadataTrig .
+
+    :timezoneMsExcelMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/timezone/timezoneMsExcelMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :timezoneMetadataTrig ;
+        fdof:isMetadataOf :timezoneMsExcel .
+
+    :timezone a fdof:FAIRInformationObject ;
+        fdof:gupri "https://example.org/fdo/timezone/timezone"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :timezoneMsExcel .
+
+    :timezoneMetadataTrig a fdof:FAIRMediaObject ;
+        fdof:gupri "https://example.org/fdo/timezone/timezoneMetadataTrig"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+
+    :timezoneMsExcel a fdof:FAIRMediaObject ;
+        fdof:gupri "https://example.org/fdo/timezone/timezoneMsExcel"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/vnd.ms-excel> .
+}
+

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fdo-creation-pipeline"
+version = "0.1.0"
+description = "Wizard-driven pipeline that turns an input file into a FAIR Digital Object (FDOF)."
+requires-python = ">=3.11"
+dependencies = [
+    "rdflib>=7.0", 
+    "pyshacl>=0.25",
+    "PySide6>=6.6",
+    "python-magic>=0.4",
+    "python-magic-bin>=0.4 ; sys_platform == 'win32'",  # bundled libmagic on Windows
+]
+
+[tool.setuptools]
+packages = []

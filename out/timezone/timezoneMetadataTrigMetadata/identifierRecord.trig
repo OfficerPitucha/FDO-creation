@@ -1,0 +1,13 @@
+@prefix : <https://example.org/fdo/timezone#> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:timezoneMetadataTrigMetadataIdRecord {
+    :timezoneMetadataTrigMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/timezone/timezoneMetadataTrigMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :timezoneMetadataTrig ;
+        fdof:isMetadataOf :timezoneMetadataTrig .
+}
+
