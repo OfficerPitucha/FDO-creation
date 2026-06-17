@@ -1,0 +1,19 @@
+@prefix : <https://example.org/fdo/timezone#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:timezoneCsvMetadata {
+    :timezoneCsvMetadata fdof:isMetadataOf :timezoneCsv .
+
+    :timezoneCsv a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "CSV Distribution of the Timezone"@en ;
+        dcat:byteSize "16249"^^xsd:int ;
+        dcat:downloadURL <https://example.org/fdo/timezone/timezone.csv> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> ;
+        fdof:gupri "https://example.org/fdo/timezone/timezoneCsv"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/text/csv> .
+}
+

@@ -11,12 +11,12 @@
     :timezone a dcat:Dataset,
             fdof:FAIRInformationObject ;
         dct:identifier "https://example.org/fdo/timezone/timezone" ;
-        dct:issued "2026-06-14"^^xsd:date ;
+        dct:issued "2026-06-17"^^xsd:date ;
         dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
         dct:title "Timezone" ;
-        dcat:distribution :timezoneMsExcel ;
+        dcat:distribution :timezoneCsv ;
         fdof:gupri "https://example.org/fdo/timezone/timezone"^^xsd:anyURI ;
-        fdof:hasInformationObjectType fdoft:Metadata ;
-        fdof:isMaterializedBy :timezoneMsExcel .
+        fdof:hasInformationObjectType fdoft:Dataset ;
+        fdof:isMaterializedBy :timezoneCsv .
 }
 

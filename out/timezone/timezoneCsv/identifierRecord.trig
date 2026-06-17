@@ -1,0 +1,10 @@
+@prefix : <https://example.org/fdo/timezone#> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:timezoneCsvIdRecord {
+    :timezoneCsv a fdof:FAIRMediaObject ;
+        fdof:gupri "https://example.org/fdo/timezone/timezoneCsv"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/text/csv> .
+}
+

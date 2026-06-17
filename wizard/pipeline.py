@@ -84,6 +84,13 @@ TYPE_REGISTRY: dict[str, tuple[URIRef | None, URIRef | None]] = {
 FDMO_SUPERTYPE = FDOF_NS.FAIRMediaObject  # FDMO fallback
 FDIO_SUPERTYPE = FDOFT_NS.Metadata        # FDIO fallback
 
+# Private instance resolves from Python's built-in table, not the
+# machine-dependent global (Windows registry maps .csv to ms-excel).
+_MIME = mimetypes.MimeTypes()
+# RDF types absent from the stdlib table on every platform.
+_MIME.add_type("text/turtle", ".ttl")
+_MIME.add_type("application/ld+json", ".jsonld")
+
 
 # ---------------------------------------------------------------------
 # Wizard log
@@ -186,7 +193,7 @@ def detect_input(path: Path) -> tuple[str, str]:
     """
     if not path.is_file():
         raise SystemExit(f"Input file not found: {path}")
-    mime, _ = mimetypes.guess_type(str(path))
+    mime, _ = _MIME.guess_type(str(path))
     if mime:
         return mime, "mimetypes.guess_type (extension)"
     try:

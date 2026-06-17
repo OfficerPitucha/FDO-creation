@@ -1,8 +1,8 @@
 @prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-fdof:FAIRMediaObject a owl:Class ;
-    rdfs:subClassOf fdof:FAIRDigitalObject,
-        fdof:MediaObject .
+fdoft:Csv a owl:Class ;
+    rdfs:subClassOf fdof:FAIRMediaObject .
 
