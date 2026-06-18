@@ -20,18 +20,6 @@
         fdof:isMaterializedBy :timezoneCsv .
 }
 
-:timezoneMetadataTrigMetadata {
-    :timezoneMetadataTrigMetadata fdof:isMetadataOf :timezoneMetadataTrig .
-
-    :timezoneMetadataTrig a dcat:Distribution,
-            fdof:FAIRMediaObject ;
-        dct:title "TriG Distribution of the Metadata Records Related to the Timezone FAIR Digital Object"@en ;
-        dcat:downloadURL <https://example.org/fdo/timezone/timezoneMetadata.trig> ;
-        dcat:mediaType <https://www.iana.org/assignments/media-types/application/trig> ;
-        fdof:gupri "https://example.org/fdo/timezone/timezoneMetadataTrig"^^xsd:anyURI ;
-        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
-}
-
 :timezoneCsvMetadata {
     :timezoneCsvMetadata fdof:isMetadataOf :timezoneCsv .
 
@@ -46,6 +34,12 @@
 }
 
 :skeleton {
+    :timezoneMetadataTrigMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/timezone/timezoneMetadataTrigMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :timezoneMetadataTrig ;
+        fdof:isMetadataOf :timezoneMetadataTrig .
+
     :timezoneCsvMetadata a fdof:FAIRMetadataRecord ;
         fdof:gupri "https://example.org/fdo/timezone/timezoneCsvMetadata"^^xsd:anyURI ;
         fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
@@ -58,22 +52,28 @@
         fdof:isMaterializedBy :timezoneMetadataTrig ;
         fdof:isMetadataOf :timezone .
 
-    :timezoneMetadataTrigMetadata a fdof:FAIRMetadataRecord ;
-        fdof:gupri "https://example.org/fdo/timezone/timezoneMetadataTrigMetadata"^^xsd:anyURI ;
-        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
-        fdof:isMaterializedBy :timezoneMetadataTrig ;
-        fdof:isMetadataOf :timezoneMetadataTrig .
-
     :timezone a fdof:FAIRInformationObject ;
         fdof:gupri "https://example.org/fdo/timezone/timezone"^^xsd:anyURI ;
         fdof:hasInformationObjectType fdoft:Dataset ;
         fdof:isMaterializedBy :timezoneCsv .
 
+    :timezoneMetadataTrig a fdof:FAIRMediaObject ;
+        fdof:gupri "https://example.org/fdo/timezone/timezoneMetadataTrig"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+
     :timezoneCsv a fdof:FAIRMediaObject ;
         fdof:gupri "https://example.org/fdo/timezone/timezoneCsv"^^xsd:anyURI ;
         fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/text/csv> .
+}
 
-    :timezoneMetadataTrig a fdof:FAIRMediaObject ;
+:timezoneMetadataTrigMetadata {
+    :timezoneMetadataTrigMetadata fdof:isMetadataOf :timezoneMetadataTrig .
+
+    :timezoneMetadataTrig a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "TriG Distribution of the Metadata Records Related to the Timezone FAIR Digital Object"@en ;
+        dcat:downloadURL <https://example.org/fdo/timezone/timezoneMetadata.trig> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/application/trig> ;
         fdof:gupri "https://example.org/fdo/timezone/timezoneMetadataTrig"^^xsd:anyURI ;
         fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
 }

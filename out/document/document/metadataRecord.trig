@@ -1,0 +1,22 @@
+@prefix : <https://example.org/fdo/document#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:documentMetadata {
+    :documentMetadata fdof:isMetadataOf :document .
+
+    :document a dcat:Dataset,
+            fdof:FAIRInformationObject ;
+        dct:identifier "https://example.org/fdo/document/document" ;
+        dct:issued "2026-06-17"^^xsd:date ;
+        dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+        dct:title "Document" ;
+        dcat:distribution :documentPdf ;
+        fdof:gupri "https://example.org/fdo/document/document"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Article ;
+        fdof:isMaterializedBy :documentPdf .
+}
+

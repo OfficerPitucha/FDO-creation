@@ -1,0 +1,12 @@
+@prefix : <https://example.org/fdo/image#> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:imageIdRecord {
+    :image a fdof:FAIRInformationObject ;
+        fdof:gupri "https://example.org/fdo/image/image"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Photograph ;
+        fdof:isMaterializedBy :imageJpeg .
+}
+

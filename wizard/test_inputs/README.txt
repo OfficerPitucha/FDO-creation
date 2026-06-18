@@ -19,7 +19,7 @@ pip install .
 ```
 
 ## Usage
-Taking `timezone.csv` as an example.
+Taking timezone.csv as an example.
 
 Run these from the `wizard/` directory (`cd wizard`). Output is always written to `/out/`
 
@@ -43,7 +43,7 @@ python gui.py
 
 Launch pre-populated:
 ```powershell
-python pipeline.py test_inputs/timezone.csv --gui
+python pipeline.py timezone.csv --gui
 ```
 
 ### Serve the result
@@ -78,5 +78,5 @@ out/<slug>/
     <slug>MetadataTrig/               # TriG FDMO (the bundled TriG)
     <slug><Suffix>Metadata/           # FMR of the input FDMO (terminal)
     <slug>MetadataTrigMetadata/       # FMR of the TriG FDMO (terminal)
-    <slug>MetaMetadata/               # optional (--with-metametadata)
+    <slug>MetaMetadata/               # optional
 ```

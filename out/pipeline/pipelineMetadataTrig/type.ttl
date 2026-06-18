@@ -1,0 +1,11 @@
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+fdoft:Trig a owl:Class ;
+    rdfs:subClassOf fdof:FAIRMediaObject ;
+    fdof:gupri "https://w3id.org/fdof/types/fdoftTrig"^^xsd:anyURI ;
+    fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+

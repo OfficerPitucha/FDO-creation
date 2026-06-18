@@ -1,0 +1,11 @@
+@prefix : <https://example.org/fdo/readme#> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:readmeMetadataTrigMetadata a fdof:FAIRMetadataRecord ;
+    fdof:gupri "https://example.org/fdo/readme/readmeMetadataTrigMetadata"^^xsd:anyURI ;
+    fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+    fdof:isMaterializedBy :readmeMetadataTrig ;
+    fdof:isMetadataOf :readmeMetadataTrig .
+

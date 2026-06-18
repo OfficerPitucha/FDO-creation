@@ -1,0 +1,20 @@
+@prefix : <https://example.org/fdo/pipeline#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:pipelineMetadata fdof:isMetadataOf :pipeline .
+
+:pipeline a dcat:Dataset,
+        fdof:FAIRInformationObject ;
+    dct:identifier "https://example.org/fdo/pipeline/pipeline" ;
+    dct:issued "2026-06-18"^^xsd:date ;
+    dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+    dct:title "Pipeline" ;
+    dcat:distribution :pipelinePython ;
+    fdof:gupri "https://example.org/fdo/pipeline/pipeline"^^xsd:anyURI ;
+    fdof:hasInformationObjectType fdoft:Metadata ;
+    fdof:isMaterializedBy :pipelinePython .
+

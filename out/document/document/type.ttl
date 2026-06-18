@@ -1,0 +1,14 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+fdoft:Article a owl:Class ;
+    rdfs:label "Article"@en,
+        "Artigo"@pt ;
+    dct:description """A scientific article is a publication that is based on empirical evidence. It can support a hypothesis with original research, describe existing research or comment on current trends in a specific field.\r
+\r
+Research articles are the most common type of article in the journals publishing world. They contain pieces of original research that contribute directly to their field.  Research articles apply to all disciplines and subject areas. Research articles are written by experts, for experts and must adhere to the highest standards of peer review and scholarly communications."""@en ;
+    rdfs:subClassOf fdof:FAIRInformationObjectType .
+

@@ -1,0 +1,19 @@
+@prefix : <https://example.org/fdo/pipeline#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:pipelinePythonMetadata {
+    :pipelinePythonMetadata fdof:isMetadataOf :pipelinePython .
+
+    :pipelinePython a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "Python Distribution of the Pipeline"@en ;
+        dcat:byteSize "32454"^^xsd:int ;
+        dcat:downloadURL <https://example.org/fdo/pipeline/pipeline.py> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/text/x-python> ;
+        fdof:gupri "https://example.org/fdo/pipeline/pipelinePython"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/text/x-python> .
+}
+

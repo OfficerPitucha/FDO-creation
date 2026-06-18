@@ -1,0 +1,13 @@
+@prefix : <https://example.org/fdo/document#> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:documentPdfMetadataIdRecord {
+    :documentPdfMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/document/documentPdfMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :documentMetadataTrig ;
+        fdof:isMetadataOf :documentPdf .
+}
+

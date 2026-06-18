@@ -1,0 +1,80 @@
+@prefix : <https://example.org/fdo/pipeline#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:pipelineMetadata {
+    :pipelineMetadata fdof:isMetadataOf :pipeline .
+
+    :pipeline a dcat:Dataset,
+            fdof:FAIRInformationObject ;
+        dct:identifier "https://example.org/fdo/pipeline/pipeline" ;
+        dct:issued "2026-06-18"^^xsd:date ;
+        dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+        dct:title "Pipeline" ;
+        dcat:distribution :pipelinePython ;
+        fdof:gupri "https://example.org/fdo/pipeline/pipeline"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :pipelinePython .
+}
+
+:skeleton {
+    :pipelineMetadataTrigMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/pipeline/pipelineMetadataTrigMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :pipelineMetadataTrig ;
+        fdof:isMetadataOf :pipelineMetadataTrig .
+
+    :pipelinePythonMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/pipeline/pipelinePythonMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :pipelineMetadataTrig ;
+        fdof:isMetadataOf :pipelinePython .
+
+    :pipelineMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/pipeline/pipelineMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :pipelineMetadataTrig ;
+        fdof:isMetadataOf :pipeline .
+
+    :pipeline a fdof:FAIRInformationObject ;
+        fdof:gupri "https://example.org/fdo/pipeline/pipeline"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :pipelinePython .
+
+    :pipelineMetadataTrig a fdof:FAIRMediaObject ;
+        fdof:gupri "https://example.org/fdo/pipeline/pipelineMetadataTrig"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+
+    :pipelinePython a fdof:FAIRMediaObject ;
+        fdof:gupri "https://example.org/fdo/pipeline/pipelinePython"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/text/x-python> .
+}
+
+:pipelinePythonMetadata {
+    :pipelinePythonMetadata fdof:isMetadataOf :pipelinePython .
+
+    :pipelinePython a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "Python Distribution of the Pipeline"@en ;
+        dcat:byteSize "32454"^^xsd:int ;
+        dcat:downloadURL <https://example.org/fdo/pipeline/pipeline.py> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/text/x-python> ;
+        fdof:gupri "https://example.org/fdo/pipeline/pipelinePython"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/text/x-python> .
+}
+
+:pipelineMetadataTrigMetadata {
+    :pipelineMetadataTrigMetadata fdof:isMetadataOf :pipelineMetadataTrig .
+
+    :pipelineMetadataTrig a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "TriG Distribution of the Metadata Records Related to the Pipeline FAIR Digital Object"@en ;
+        dcat:downloadURL <https://example.org/fdo/pipeline/pipelineMetadata.trig> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/application/trig> ;
+        fdof:gupri "https://example.org/fdo/pipeline/pipelineMetadataTrig"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+}
+

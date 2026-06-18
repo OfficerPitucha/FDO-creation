@@ -1,0 +1,22 @@
+@prefix : <https://example.org/fdo/readme#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:readmeMetadata {
+    :readmeMetadata fdof:isMetadataOf :readme .
+
+    :readme a dcat:Dataset,
+            fdof:FAIRInformationObject ;
+        dct:identifier "https://example.org/fdo/readme/readme" ;
+        dct:issued "2026-06-18"^^xsd:date ;
+        dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+        dct:title "Readme" ;
+        dcat:distribution :readmePlain ;
+        fdof:gupri "https://example.org/fdo/readme/readme"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :readmePlain .
+}
+

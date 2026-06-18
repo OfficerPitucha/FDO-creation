@@ -1,0 +1,102 @@
+@prefix : <https://example.org/fdo/image#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:skeleton {
+    :imageJpegMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/image/imageJpegMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :imageMetadataTrig ;
+        fdof:isMetadataOf :imageJpeg .
+
+    :imageMetaMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/image/imageMetaMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MetaMetadata ;
+        fdof:isMaterializedBy :imageMetadataTrig ;
+        fdof:isMetadataOf :imageMetadata .
+
+    :imageMetadataTrigMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/image/imageMetadataTrigMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :imageMetadataTrig ;
+        fdof:isMetadataOf :imageMetadataTrig .
+
+    :image a fdof:FAIRInformationObject ;
+        fdof:gupri "https://example.org/fdo/image/image"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Photograph ;
+        fdof:isMaterializedBy :imageJpeg .
+
+    :imageMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/image/imageMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :imageMetadataTrig ;
+        fdof:isMetadataOf :image .
+
+    :imageJpeg a fdof:FAIRMediaObject ;
+        fdof:gupri "https://example.org/fdo/image/imageJpeg"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/image/jpeg> .
+
+    :imageMetadataTrig a fdof:FAIRMediaObject ;
+        fdof:gupri "https://example.org/fdo/image/imageMetadataTrig"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+}
+
+:imageMetadata {
+    :imageMetadata fdof:isMetadataOf :image .
+
+    :image a dcat:Dataset,
+            fdof:FAIRInformationObject ;
+        dct:description "random image" ;
+        dct:identifier "https://example.org/fdo/image/image" ;
+        dct:issued "2026-06-18"^^xsd:date ;
+        dct:license <https://creativecommons.org/publicdomain/mark/1.0/> ;
+        dct:title "Image" ;
+        dcat:distribution :imageJpeg ;
+        fdof:gupri "https://example.org/fdo/image/image"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Photograph ;
+        fdof:isMaterializedBy :imageJpeg .
+}
+
+:imageMetaMetadata {
+    :imageMetaMetadata fdof:isMetadataOf :imageMetadata .
+
+    :imageMetadata a fdof:FAIRMetadataRecord ;
+        dct:identifier "https://example.org/fdo/image/imageMetadata" ;
+        dct:issued "2026-06-18"^^xsd:date ;
+        dct:license <https://creativecommons.org/publicdomain/mark/1.0/> ;
+        dct:title "Metadata Record of the Image" ;
+        dcat:distribution :imageMetadataTrig ;
+        fdof:gupri "https://example.org/fdo/image/imageMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :imageMetadataTrig ;
+        fdof:isMetadataOf :image .
+}
+
+:imageJpegMetadata {
+    :imageJpegMetadata fdof:isMetadataOf :imageJpeg .
+
+    :imageJpeg a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "JPEG Distribution of the Image"@en ;
+        dcat:byteSize "200951"^^xsd:int ;
+        dcat:downloadURL <https://example.org/fdo/image/image.jpg> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/image/jpeg> ;
+        fdof:gupri "https://example.org/fdo/image/imageJpeg"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/image/jpeg> .
+}
+
+:imageMetadataTrigMetadata {
+    :imageMetadataTrigMetadata fdof:isMetadataOf :imageMetadataTrig .
+
+    :imageMetadataTrig a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "TriG Distribution of the Metadata Records Related to the Image FAIR Digital Object"@en ;
+        dcat:downloadURL <https://example.org/fdo/image/imageMetadata.trig> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/application/trig> ;
+        fdof:gupri "https://example.org/fdo/image/imageMetadataTrig"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+}
+

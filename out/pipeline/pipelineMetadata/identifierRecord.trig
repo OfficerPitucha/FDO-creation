@@ -1,0 +1,13 @@
+@prefix : <https://example.org/fdo/pipeline#> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:pipelineMetadataIdRecord {
+    :pipelineMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/pipeline/pipelineMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :pipelineMetadataTrig ;
+        fdof:isMetadataOf :pipeline .
+}
+

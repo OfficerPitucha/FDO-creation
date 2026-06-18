@@ -1,0 +1,80 @@
+@prefix : <https://example.org/fdo/readme#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:readmeMetadata {
+    :readmeMetadata fdof:isMetadataOf :readme .
+
+    :readme a dcat:Dataset,
+            fdof:FAIRInformationObject ;
+        dct:identifier "https://example.org/fdo/readme/readme" ;
+        dct:issued "2026-06-18"^^xsd:date ;
+        dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+        dct:title "Readme" ;
+        dcat:distribution :readmePlain ;
+        fdof:gupri "https://example.org/fdo/readme/readme"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :readmePlain .
+}
+
+:readmeMetadataTrigMetadata {
+    :readmeMetadataTrigMetadata fdof:isMetadataOf :readmeMetadataTrig .
+
+    :readmeMetadataTrig a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "TriG Distribution of the Metadata Records Related to the Readme FAIR Digital Object"@en ;
+        dcat:downloadURL <https://example.org/fdo/readme/readmeMetadata.trig> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/application/trig> ;
+        fdof:gupri "https://example.org/fdo/readme/readmeMetadataTrig"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+}
+
+:skeleton {
+    :readmePlainMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/readme/readmePlainMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :readmeMetadataTrig ;
+        fdof:isMetadataOf :readmePlain .
+
+    :readmeMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/readme/readmeMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :readmeMetadataTrig ;
+        fdof:isMetadataOf :readme .
+
+    :readmeMetadataTrigMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/readme/readmeMetadataTrigMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :readmeMetadataTrig ;
+        fdof:isMetadataOf :readmeMetadataTrig .
+
+    :readme a fdof:FAIRInformationObject ;
+        fdof:gupri "https://example.org/fdo/readme/readme"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :readmePlain .
+
+    :readmePlain a fdof:FAIRMediaObject ;
+        fdof:gupri "https://example.org/fdo/readme/readmePlain"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/text/plain> .
+
+    :readmeMetadataTrig a fdof:FAIRMediaObject ;
+        fdof:gupri "https://example.org/fdo/readme/readmeMetadataTrig"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+}
+
+:readmePlainMetadata {
+    :readmePlainMetadata fdof:isMetadataOf :readmePlain .
+
+    :readmePlain a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "Plain Distribution of the Readme"@en ;
+        dcat:byteSize "2339"^^xsd:int ;
+        dcat:downloadURL <https://example.org/fdo/readme/readme.txt> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/text/plain> ;
+        fdof:gupri "https://example.org/fdo/readme/readmePlain"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/text/plain> .
+}
+

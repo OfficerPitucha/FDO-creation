@@ -1,0 +1,142 @@
+{
+  "summary": {
+    "total": 22,
+    "automated": 17,
+    "elicited": 5,
+    "overridden": 0
+  },
+  "entries": [
+    {
+      "field": "input.mimetype",
+      "mode": "automated",
+      "value": "text/plain",
+      "source": "mimetypes built-in table (extension)"
+    },
+    {
+      "field": "input.fdmo_class",
+      "mode": "automated",
+      "value": "https://w3id.org/fdof/ontology#FAIRMediaObject",
+      "source": "registry supertype fallback"
+    },
+    {
+      "field": "input.fdio_default_class",
+      "mode": "automated",
+      "value": "https://w3id.org/fdof/types#Metadata",
+      "source": "registry supertype fallback"
+    },
+    {
+      "field": "slug",
+      "mode": "automated",
+      "value": "readme",
+      "source": "sluggify(filename stem)"
+    },
+    {
+      "field": "input.fdmo_suffix",
+      "mode": "automated",
+      "value": "Plain",
+      "source": "fdmo_suffix_for(text/plain)"
+    },
+    {
+      "field": "dcat:byteSize",
+      "mode": "automated",
+      "value": "2339",
+      "source": "os.stat().st_size"
+    },
+    {
+      "field": "dct:issued",
+      "mode": "automated",
+      "value": "2026-06-18",
+      "source": "datetime.date.today()"
+    },
+    {
+      "field": "fdof:hasEncodingFormat",
+      "mode": "automated",
+      "value": "https://www.iana.org/assignments/media-types/text/plain",
+      "source": "IANA URI for text/plain"
+    },
+    {
+      "field": "dcat:downloadURL[input]",
+      "mode": "automated",
+      "value": "https://example.org/fdo/readme/readme.txt",
+      "source": "GUPRI base + extension"
+    },
+    {
+      "field": "dcat:downloadURL[trig]",
+      "mode": "automated",
+      "value": "https://example.org/fdo/readme/readmeMetadata.trig",
+      "source": "GUPRI base + Metadata.trig"
+    },
+    {
+      "field": "name.fdio",
+      "mode": "automated",
+      "value": "readme",
+      "source": "derive_names(slug, fdmo_suffix)"
+    },
+    {
+      "field": "name.fdmo_input",
+      "mode": "automated",
+      "value": "readmePlain",
+      "source": "derive_names(slug, fdmo_suffix)"
+    },
+    {
+      "field": "name.fdmo_trig",
+      "mode": "automated",
+      "value": "readmeMetadataTrig",
+      "source": "derive_names(slug, fdmo_suffix)"
+    },
+    {
+      "field": "name.fmr",
+      "mode": "automated",
+      "value": "readmeMetadata",
+      "source": "derive_names(slug, fdmo_suffix)"
+    },
+    {
+      "field": "name.fmr_input",
+      "mode": "automated",
+      "value": "readmePlainMetadata",
+      "source": "derive_names(slug, fdmo_suffix)"
+    },
+    {
+      "field": "name.fmr_trig",
+      "mode": "automated",
+      "value": "readmeMetadataTrigMetadata",
+      "source": "derive_names(slug, fdmo_suffix)"
+    },
+    {
+      "field": "dct:title",
+      "mode": "elicited",
+      "value": "Readme",
+      "prompt": "Title"
+    },
+    {
+      "field": "dct:description",
+      "mode": "elicited",
+      "value": "",
+      "prompt": "Description"
+    },
+    {
+      "field": "dct:license",
+      "mode": "elicited",
+      "value": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "prompt": "License menu: CC0 1.0 (public domain dedication)"
+    },
+    {
+      "field": "fdof:hasInformationObjectType",
+      "mode": "elicited",
+      "value": "https://w3id.org/fdof/types#Metadata",
+      "prompt": "IO-type menu: Generic"
+    },
+    {
+      "field": "fdo.create_metametadata",
+      "mode": "elicited",
+      "value": "False",
+      "prompt": "Create metadata-of-metadata toggle (off by default)"
+    },
+    {
+      "field": "type_record.fallback_count",
+      "mode": "automated",
+      "value": "1",
+      "source": "count of objects whose /type fell back to FDOF-O supertype or a stub (vocabulary-coverage metric)"
+    }
+  ]
+}
