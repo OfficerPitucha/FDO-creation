@@ -1,0 +1,142 @@
+{
+  "summary": {
+    "total": 22,
+    "automated": 17,
+    "elicited": 5,
+    "overridden": 0
+  },
+  "entries": [
+    {
+      "field": "input.mimetype",
+      "mode": "automated",
+      "value": "audio/flac",
+      "source": "mimetypes built-in table (extension)"
+    },
+    {
+      "field": "input.fdmo_class",
+      "mode": "automated",
+      "value": "https://w3id.org/fdof/ontology#FAIRMediaObject",
+      "source": "registry supertype fallback"
+    },
+    {
+      "field": "input.fdio_default_class",
+      "mode": "automated",
+      "value": "https://w3id.org/fdof/types#Metadata",
+      "source": "registry supertype fallback"
+    },
+    {
+      "field": "slug",
+      "mode": "automated",
+      "value": "audio",
+      "source": "sluggify(filename stem)"
+    },
+    {
+      "field": "input.fdmo_suffix",
+      "mode": "automated",
+      "value": "Flac",
+      "source": "fdmo_suffix_for(audio/flac)"
+    },
+    {
+      "field": "dcat:byteSize",
+      "mode": "automated",
+      "value": "108081",
+      "source": "os.stat().st_size"
+    },
+    {
+      "field": "dct:issued",
+      "mode": "automated",
+      "value": "2026-06-19",
+      "source": "datetime.date.today()"
+    },
+    {
+      "field": "fdof:hasEncodingFormat",
+      "mode": "automated",
+      "value": "https://www.iana.org/assignments/media-types/audio/flac",
+      "source": "IANA URI for audio/flac"
+    },
+    {
+      "field": "dcat:downloadURL[input]",
+      "mode": "automated",
+      "value": "https://example.org/fdo/audio/audio.flac",
+      "source": "GUPRI base + extension"
+    },
+    {
+      "field": "dcat:downloadURL[trig]",
+      "mode": "automated",
+      "value": "https://example.org/fdo/audio/audioMetadata.trig",
+      "source": "GUPRI base + Metadata.trig"
+    },
+    {
+      "field": "name.fdio",
+      "mode": "automated",
+      "value": "audio",
+      "source": "derive_names(slug, fdmo_suffix)"
+    },
+    {
+      "field": "name.fdmo_input",
+      "mode": "automated",
+      "value": "audioFlac",
+      "source": "derive_names(slug, fdmo_suffix)"
+    },
+    {
+      "field": "name.fdmo_trig",
+      "mode": "automated",
+      "value": "audioMetadataTrig",
+      "source": "derive_names(slug, fdmo_suffix)"
+    },
+    {
+      "field": "name.fmr",
+      "mode": "automated",
+      "value": "audioMetadata",
+      "source": "derive_names(slug, fdmo_suffix)"
+    },
+    {
+      "field": "name.fmr_input",
+      "mode": "automated",
+      "value": "audioFlacMetadata",
+      "source": "derive_names(slug, fdmo_suffix)"
+    },
+    {
+      "field": "name.fmr_trig",
+      "mode": "automated",
+      "value": "audioMetadataTrigMetadata",
+      "source": "derive_names(slug, fdmo_suffix)"
+    },
+    {
+      "field": "dct:title",
+      "mode": "elicited",
+      "value": "Audio",
+      "prompt": "Title"
+    },
+    {
+      "field": "dct:description",
+      "mode": "elicited",
+      "value": "flac audio sample",
+      "prompt": "Description"
+    },
+    {
+      "field": "dct:license",
+      "mode": "elicited",
+      "value": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "prompt": "License menu: CC0 1.0 (public domain dedication)"
+    },
+    {
+      "field": "fdof:hasInformationObjectType",
+      "mode": "elicited",
+      "value": "https://w3id.org/fdof/types#Metadata",
+      "prompt": "IO-type menu: Generic"
+    },
+    {
+      "field": "fdo.create_metametadata",
+      "mode": "elicited",
+      "value": "False",
+      "prompt": "Create metadata-of-metadata toggle (off by default)"
+    },
+    {
+      "field": "type_record.fallback_count",
+      "mode": "automated",
+      "value": "1",
+      "source": "count of objects whose /type fell back to FDOF-O supertype or a stub (vocabulary-coverage metric)"
+    }
+  ]
+}

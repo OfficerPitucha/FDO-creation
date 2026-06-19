@@ -1,0 +1,13 @@
+@prefix : <https://example.org/fdo/audio#> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:audioMetadataTrigMetadataIdRecord {
+    :audioMetadataTrigMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/audio/audioMetadataTrigMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :audioMetadataTrig ;
+        fdof:isMetadataOf :audioMetadataTrig .
+}
+

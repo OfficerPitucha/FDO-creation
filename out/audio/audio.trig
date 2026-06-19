@@ -1,0 +1,81 @@
+@prefix : <https://example.org/fdo/audio#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:audioFlacMetadata {
+    :audioFlacMetadata fdof:isMetadataOf :audioFlac .
+
+    :audioFlac a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "FLAC Distribution of the Audio"@en ;
+        dcat:byteSize "108081"^^xsd:int ;
+        dcat:downloadURL <https://example.org/fdo/audio/audio.flac> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/audio/flac> ;
+        fdof:gupri "https://example.org/fdo/audio/audioFlac"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/audio/flac> .
+}
+
+:audioMetadata {
+    :audioMetadata fdof:isMetadataOf :audio .
+
+    :audio a dcat:Dataset,
+            fdof:FAIRInformationObject ;
+        dct:description "flac audio sample" ;
+        dct:identifier "https://example.org/fdo/audio/audio" ;
+        dct:issued "2026-06-19"^^xsd:date ;
+        dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+        dct:title "Audio" ;
+        dcat:distribution :audioFlac ;
+        fdof:gupri "https://example.org/fdo/audio/audio"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :audioFlac .
+}
+
+:audioMetadataTrigMetadata {
+    :audioMetadataTrigMetadata fdof:isMetadataOf :audioMetadataTrig .
+
+    :audioMetadataTrig a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "TriG Distribution of the Metadata Records Related to the Audio FAIR Digital Object"@en ;
+        dcat:downloadURL <https://example.org/fdo/audio/audioMetadata.trig> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/application/trig> ;
+        fdof:gupri "https://example.org/fdo/audio/audioMetadataTrig"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+}
+
+:skeleton {
+    :audioFlacMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/audio/audioFlacMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :audioMetadataTrig ;
+        fdof:isMetadataOf :audioFlac .
+
+    :audioMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/audio/audioMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :audioMetadataTrig ;
+        fdof:isMetadataOf :audio .
+
+    :audioMetadataTrigMetadata a fdof:FAIRMetadataRecord ;
+        fdof:gupri "https://example.org/fdo/audio/audioMetadataTrigMetadata"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:MediaObjectMetadataRecord ;
+        fdof:isMaterializedBy :audioMetadataTrig ;
+        fdof:isMetadataOf :audioMetadataTrig .
+
+    :audio a fdof:FAIRInformationObject ;
+        fdof:gupri "https://example.org/fdo/audio/audio"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :audioFlac .
+
+    :audioFlac a fdof:FAIRMediaObject ;
+        fdof:gupri "https://example.org/fdo/audio/audioFlac"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/audio/flac> .
+
+    :audioMetadataTrig a fdof:FAIRMediaObject ;
+        fdof:gupri "https://example.org/fdo/audio/audioMetadataTrig"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+}
+

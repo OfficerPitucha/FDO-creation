@@ -1,0 +1,23 @@
+@prefix : <https://example.org/fdo/audio#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:audioMetadata {
+    :audioMetadata fdof:isMetadataOf :audio .
+
+    :audio a dcat:Dataset,
+            fdof:FAIRInformationObject ;
+        dct:description "flac audio sample" ;
+        dct:identifier "https://example.org/fdo/audio/audio" ;
+        dct:issued "2026-06-19"^^xsd:date ;
+        dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+        dct:title "Audio" ;
+        dcat:distribution :audioFlac ;
+        fdof:gupri "https://example.org/fdo/audio/audio"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :audioFlac .
+}
+

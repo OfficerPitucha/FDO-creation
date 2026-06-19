@@ -1,0 +1,12 @@
+@prefix : <https://example.org/fdo/audio#> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix fdoft: <https://w3id.org/fdof/types#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:audioIdRecord {
+    :audio a fdof:FAIRInformationObject ;
+        fdof:gupri "https://example.org/fdo/audio/audio"^^xsd:anyURI ;
+        fdof:hasInformationObjectType fdoft:Metadata ;
+        fdof:isMaterializedBy :audioFlac .
+}
+

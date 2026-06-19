@@ -29,7 +29,7 @@ Prompts for title, description, license, and information-object type, everything
 is auto-derived.
 
 ```powershell
-python pipeline.py timezone.csv
+python pipeline.py test_inputs/timezone.csv
 ```
 
 ### GUI

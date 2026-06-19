@@ -1,0 +1,18 @@
+@prefix : <https://example.org/fdo/audio#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fdof: <https://w3id.org/fdof/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:audioMetadataTrigMetadata {
+    :audioMetadataTrigMetadata fdof:isMetadataOf :audioMetadataTrig .
+
+    :audioMetadataTrig a dcat:Distribution,
+            fdof:FAIRMediaObject ;
+        dct:title "TriG Distribution of the Metadata Records Related to the Audio FAIR Digital Object"@en ;
+        dcat:downloadURL <https://example.org/fdo/audio/audioMetadata.trig> ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/application/trig> ;
+        fdof:gupri "https://example.org/fdo/audio/audioMetadataTrig"^^xsd:anyURI ;
+        fdof:hasEncodingFormat <https://www.iana.org/assignments/media-types/application/trig> .
+}
+
