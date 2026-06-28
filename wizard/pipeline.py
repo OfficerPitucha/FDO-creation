@@ -96,6 +96,16 @@ _MIME.add_type("application/ld+json", ".jsonld")
 # ---------------------------------------------------------------------
 # Wizard log
 # ---------------------------------------------------------------------
+#   "derived"    - computed from the input file or the fixed vocabulary.
+#   "suggested"  - an automated default exists, but it is a semantic guess
+#                  the user may need to correct (e.g. a filename-derived
+#                  title, or the registry's information-object-type guess).
+#   "user_only"  - no automated source can produce a correct value.
+#   "structural" - a build-time toggle with a fixed default, not a
+#                  metadata value.
+CATEGORIES = ("derived", "suggested", "user_only", "structural")
+_HAS_SOURCE = {"derived", "suggested"}  # decisions with an automated source
+
 
 @dataclass
 class WizardLog:
@@ -105,46 +115,44 @@ class WizardLog:
     def new(cls) -> "WizardLog":
         return cls(entries=[])
 
-    def auto(self, field: str, value: Any, source: str) -> None:
+    def record(self, field: str, category: str, *, value: Any,
+               source: str = "") -> None:
+        """Record one decision and its provenance category. `value` is the
+        value actually used; the category answers RQ2 for that decision."""
         self.entries.append({
-            "field": field, "mode": "automated",
-            "value": str(value), "source": source,
-        })
-
-    def elicit(self, field: str, value: Any, prompt: str) -> None:
-        self.entries.append({
-            "field": field, "mode": "elicited",
-            "value": str(value), "prompt": prompt,
-        })
-
-    def override(self, field: str, value: Any, automated_value: Any,
-                 source: str) -> None:
-        self.entries.append({
-            "field": field, "mode": "elicited", "overridden": True,
-            "value": str(value), "automated_value": str(automated_value),
+            "field": field,
+            "category": category,
+            "has_automated_source": category in _HAS_SOURCE,
+            "value": str(value),
             "source": source,
         })
 
-    def auto_or_override(self, field: str, value: Any, automated_value: Any,
-                         source: str) -> None:
-        """Log as automated if unchanged from the computed default,
-        otherwise as an override."""
-        if str(value) == str(automated_value):
-            self.auto(field, value, source)
-        else:
-            self.override(field, value, automated_value, source)
+    def metric(self, field: str, value: Any, source: str) -> None:
+        """Record a measurement (not a decision); excluded from the rates."""
+        self.entries.append({
+            "field": field, "category": "metric",
+            "value": str(value), "source": source,
+        })
 
     def save(self, path: Path) -> None:
-        overridden = sum(1 for e in self.entries if e.get("overridden"))
+        decisions = [e for e in self.entries if e["category"] != "metric"]
+        by_cat = {c: sum(1 for e in decisions if e["category"] == c)
+                  for c in CATEGORIES}
+        n = len(decisions)
+
+        def pct(k: int) -> float:
+            return round(100 * k / n, 1) if n else 0.0
+
+        # the lower bound counts only "derived" decisions as automated; the upper bound also 
+        # counts the semantic "suggested" guesses. Only "user_only" decisions must be elicited.
         path.write_text(json.dumps({
             "summary": {
-                "total": len(self.entries),
-                "automated": sum(1 for e in self.entries
-                                  if e["mode"] == "automated"),
-                "elicited": sum(1 for e in self.entries
-                                 if e["mode"] == "elicited"
-                                 and not e.get("overridden")),
-                "overridden": overridden,
+                "decisions": n,
+                "by_category": by_cat,
+                "must_elicit": by_cat["user_only"],
+                "automation_rate_lower_pct": pct(by_cat["derived"]),
+                "automation_rate_upper_pct": pct(
+                    by_cat["derived"] + by_cat["suggested"]),
             },
             "entries": self.entries,
         }, indent=2), encoding="utf-8")
@@ -653,44 +661,55 @@ def collect_noninteractive(defaults: Defaults) -> Decisions:
 
 
 def _build_log(defaults: Defaults, dec: Decisions) -> WizardLog:
-    """Build the wizard log from the computed defaults and the final
-    decisions, marking each changed auto value as an override."""
+    """Classify every decision by provenance category (RQ2). The category
+    is a property of the decision, not of the run; the logged value is the
+    one actually used."""
     d, log = defaults, WizardLog.new()
 
-    log.auto_or_override("input.mimetype", dec.mime, d.mime, d.mime_source)
-    log.auto("input.fdmo_class", str(d.fdmo_cls),
-             f"registry {'exact' if d.fdmo_exact else 'supertype fallback'}")
-    log.auto("input.fdio_default_class", str(d.fdio_default),
-             f"registry {'exact' if d.fdio_exact else 'supertype fallback'}")
-    log.auto_or_override("slug", dec.slug, d.slug, "sluggify(filename stem)")
-    log.auto_or_override("input.fdmo_suffix", dec.fdmo_suffix, d.fdmo_suffix,
-                         f"fdmo_suffix_for({d.mime})")
-    log.auto_or_override("dcat:byteSize", dec.byte_size, d.byte_size,
-                         "os.stat().st_size")
-    log.auto_or_override("dct:issued", dec.issued, d.issued,
-                         "datetime.date.today()")
-    log.auto_or_override("fdof:hasEncodingFormat", dec.input_encoding_iri,
-                         str(d.input_encoding_iri), f"IANA URI for {d.mime}")
-    log.auto_or_override("dcat:downloadURL[input]", dec.input_download_url,
-                         d.input_download_url, "GUPRI base + extension")
-    log.auto_or_override("dcat:downloadURL[trig]", dec.trig_download_url,
-                         d.trig_download_url, "GUPRI base + Metadata.trig")
-
+    # derived - computed from the input file or the fixed vocabulary
+    log.record("input.mimetype", "derived", value=dec.mime,
+               source=d.mime_source)
+    log.record("input.fdmo_class", "derived", value=d.fdmo_cls,
+               source=f"registry {'exact' if d.fdmo_exact else 'supertype fallback'}")
+    log.record("input.fdio_default_class", "derived", value=d.fdio_default,
+               source=f"registry {'exact' if d.fdio_exact else 'supertype fallback'}")
+    log.record("slug", "derived", value=dec.slug,
+               source="sluggify(filename stem)")
+    log.record("input.fdmo_suffix", "derived", value=dec.fdmo_suffix,
+               source=f"fdmo_suffix_for({d.mime})")
+    log.record("dcat:byteSize", "derived", value=dec.byte_size,
+               source="os.stat().st_size")
+    log.record("dct:issued", "derived", value=dec.issued,
+               source="datetime.date.today()")
+    log.record("fdof:hasEncodingFormat", "derived", value=dec.input_encoding_iri,
+               source=f"IANA URI for {d.mime}")
+    log.record("dcat:downloadURL[input]", "derived", value=dec.input_download_url,
+               source="GUPRI base + extension")
+    log.record("dcat:downloadURL[trig]", "derived", value=dec.trig_download_url,
+               source="GUPRI base + Metadata.trig")
     for field in Names.FIELDS:
         if field == "fmr_meta" and not dec.create_metametadata:
             continue
-        log.auto_or_override(
-            f"name.{field}", getattr(dec.names, field),
-            getattr(d.names, field), "derive_names(slug, fdmo_suffix)")
+        log.record(f"name.{field}", "derived", value=getattr(dec.names, field),
+                   source="derive_names(slug, fdmo_suffix)")
 
-    log.elicit("dct:title", dec.title, "Title")
-    log.elicit("dct:description", dec.description, "Description")
-    log.elicit("dct:license", dec.license_iri,
-               f"License menu: {dec.license_label}")
-    log.elicit("fdof:hasInformationObjectType", str(dec.iotype_iri),
-               f"IO-type menu: {dec.iotype_label}")
-    log.elicit("fdo.create_metametadata", dec.create_metametadata,
-               "Create metadata-of-metadata toggle (off by default)")
+    # suggested - an automated default exists, but it is a semantic guess
+    log.record("dct:title", "suggested", value=dec.title,
+               source="filename stem, title-cased (placeholder)")
+    log.record("fdof:hasInformationObjectType", "suggested", value=dec.iotype_iri,
+               source=f"registry FDIO suggestion for {d.mime} "
+                      f"({'exact' if d.fdio_exact else 'supertype fallback'})")
+
+    # user_only - no automated source can produce a correct value
+    log.record("dct:description", "user_only", value=dec.description,
+               source="no automated source")
+    log.record("dct:license", "user_only", value=dec.license_iri,
+               source="no automated source (menu default is an arbitrary constant)")
+
+    # structural - a build-time toggle, not a metadata value
+    log.record("fdo.create_metametadata", "structural",
+               value=dec.create_metametadata,
+               source="metadata-of-metadata toggle (off by default)")
     return log
 
 
@@ -752,9 +771,9 @@ def finalize(defaults: Defaults, dec: Decisions, base_out: Path,
         1 for _, _, type_status in summary
         if type_status in ("supertype fallback", "stub")
     )
-    log.auto("type_record.fallback_count", fallback_count,
-             "count of objects whose /type fell back to FDOF-O supertype "
-             "or a stub (vocabulary-coverage metric)")
+    log.metric("type_record.fallback_count", fallback_count,
+               "count of objects whose /type fell back to FDOF-O supertype "
+               "or a stub (vocabulary-coverage metric)")
 
     log_path = out_dir / "wizard-log.json"
     log.save(log_path)

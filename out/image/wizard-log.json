@@ -1,146 +1,167 @@
 {
   "summary": {
-    "total": 23,
-    "automated": 18,
-    "elicited": 5,
-    "overridden": 0
+    "decisions": 21,
+    "by_category": {
+      "derived": 16,
+      "suggested": 2,
+      "user_only": 2,
+      "structural": 1
+    },
+    "must_elicit": 2,
+    "automation_rate_lower_pct": 76.2,
+    "automation_rate_upper_pct": 85.7
   },
   "entries": [
     {
       "field": "input.mimetype",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "image/jpeg",
       "source": "mimetypes built-in table (extension)"
     },
     {
       "field": "input.fdmo_class",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "https://w3id.org/fdof/ontology#FAIRMediaObject",
       "source": "registry supertype fallback"
     },
     {
       "field": "input.fdio_default_class",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "https://w3id.org/fdof/types#Photograph",
       "source": "registry exact"
     },
     {
       "field": "slug",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "image",
       "source": "sluggify(filename stem)"
     },
     {
       "field": "input.fdmo_suffix",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "Jpeg",
       "source": "fdmo_suffix_for(image/jpeg)"
     },
     {
       "field": "dcat:byteSize",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "200951",
       "source": "os.stat().st_size"
     },
     {
       "field": "dct:issued",
-      "mode": "automated",
-      "value": "2026-06-18",
+      "category": "derived",
+      "has_automated_source": true,
+      "value": "2026-06-28",
       "source": "datetime.date.today()"
     },
     {
       "field": "fdof:hasEncodingFormat",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "https://www.iana.org/assignments/media-types/image/jpeg",
       "source": "IANA URI for image/jpeg"
     },
     {
       "field": "dcat:downloadURL[input]",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "https://example.org/fdo/image/image.jpg",
       "source": "GUPRI base + extension"
     },
     {
       "field": "dcat:downloadURL[trig]",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "https://example.org/fdo/image/imageMetadata.trig",
       "source": "GUPRI base + Metadata.trig"
     },
     {
       "field": "name.fdio",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "image",
       "source": "derive_names(slug, fdmo_suffix)"
     },
     {
       "field": "name.fdmo_input",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "imageJpeg",
       "source": "derive_names(slug, fdmo_suffix)"
     },
     {
       "field": "name.fdmo_trig",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "imageMetadataTrig",
       "source": "derive_names(slug, fdmo_suffix)"
     },
     {
       "field": "name.fmr",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "imageMetadata",
       "source": "derive_names(slug, fdmo_suffix)"
     },
     {
-      "field": "name.fmr_meta",
-      "mode": "automated",
-      "value": "imageMetaMetadata",
-      "source": "derive_names(slug, fdmo_suffix)"
-    },
-    {
       "field": "name.fmr_input",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "imageJpegMetadata",
       "source": "derive_names(slug, fdmo_suffix)"
     },
     {
       "field": "name.fmr_trig",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "imageMetadataTrigMetadata",
       "source": "derive_names(slug, fdmo_suffix)"
     },
     {
       "field": "dct:title",
-      "mode": "elicited",
+      "category": "suggested",
+      "has_automated_source": true,
       "value": "Image",
-      "prompt": "Title"
-    },
-    {
-      "field": "dct:description",
-      "mode": "elicited",
-      "value": "random image",
-      "prompt": "Description"
-    },
-    {
-      "field": "dct:license",
-      "mode": "elicited",
-      "value": "https://creativecommons.org/publicdomain/mark/1.0/",
-      "prompt": "License menu: Public Domain Mark 1.0"
+      "source": "filename stem, title-cased (placeholder)"
     },
     {
       "field": "fdof:hasInformationObjectType",
-      "mode": "elicited",
+      "category": "suggested",
+      "has_automated_source": true,
       "value": "https://w3id.org/fdof/types#Photograph",
-      "prompt": "IO-type menu: Image"
+      "source": "registry FDIO suggestion for image/jpeg (exact)"
+    },
+    {
+      "field": "dct:description",
+      "category": "user_only",
+      "has_automated_source": false,
+      "value": "",
+      "source": "no automated source"
+    },
+    {
+      "field": "dct:license",
+      "category": "user_only",
+      "has_automated_source": false,
+      "value": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "no automated source (menu default is an arbitrary constant)"
     },
     {
       "field": "fdo.create_metametadata",
-      "mode": "elicited",
-      "value": "True",
-      "prompt": "Create metadata-of-metadata toggle (off by default)"
+      "category": "structural",
+      "has_automated_source": false,
+      "value": "False",
+      "source": "metadata-of-metadata toggle (off by default)"
     },
     {
       "field": "type_record.fallback_count",
-      "mode": "automated",
+      "category": "metric",
       "value": "1",
       "source": "count of objects whose /type fell back to FDOF-O supertype or a stub (vocabulary-coverage metric)"
     }

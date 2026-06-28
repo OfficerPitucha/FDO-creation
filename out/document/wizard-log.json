@@ -1,140 +1,167 @@
 {
   "summary": {
-    "total": 22,
-    "automated": 17,
-    "elicited": 5,
-    "overridden": 0
+    "decisions": 21,
+    "by_category": {
+      "derived": 16,
+      "suggested": 2,
+      "user_only": 2,
+      "structural": 1
+    },
+    "must_elicit": 2,
+    "automation_rate_lower_pct": 76.2,
+    "automation_rate_upper_pct": 85.7
   },
   "entries": [
     {
       "field": "input.mimetype",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "application/pdf",
-      "source": "mimetypes.guess_type (extension)"
+      "source": "mimetypes built-in table (extension)"
     },
     {
       "field": "input.fdmo_class",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "https://w3id.org/fdof/types#Pdf",
       "source": "registry exact"
     },
     {
       "field": "input.fdio_default_class",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "https://w3id.org/fdof/types#Article",
       "source": "registry exact"
     },
     {
       "field": "slug",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "document",
       "source": "sluggify(filename stem)"
     },
     {
       "field": "input.fdmo_suffix",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "Pdf",
       "source": "fdmo_suffix_for(application/pdf)"
     },
     {
       "field": "dcat:byteSize",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "18810",
       "source": "os.stat().st_size"
     },
     {
       "field": "dct:issued",
-      "mode": "automated",
-      "value": "2026-06-17",
+      "category": "derived",
+      "has_automated_source": true,
+      "value": "2026-06-28",
       "source": "datetime.date.today()"
     },
     {
       "field": "fdof:hasEncodingFormat",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "https://www.iana.org/assignments/media-types/application/pdf",
       "source": "IANA URI for application/pdf"
     },
     {
       "field": "dcat:downloadURL[input]",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "https://example.org/fdo/document/document.pdf",
       "source": "GUPRI base + extension"
     },
     {
       "field": "dcat:downloadURL[trig]",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "https://example.org/fdo/document/documentMetadata.trig",
       "source": "GUPRI base + Metadata.trig"
     },
     {
       "field": "name.fdio",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "document",
       "source": "derive_names(slug, fdmo_suffix)"
     },
     {
       "field": "name.fdmo_input",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "documentPdf",
       "source": "derive_names(slug, fdmo_suffix)"
     },
     {
       "field": "name.fdmo_trig",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "documentMetadataTrig",
       "source": "derive_names(slug, fdmo_suffix)"
     },
     {
       "field": "name.fmr",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "documentMetadata",
       "source": "derive_names(slug, fdmo_suffix)"
     },
     {
       "field": "name.fmr_input",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "documentPdfMetadata",
       "source": "derive_names(slug, fdmo_suffix)"
     },
     {
       "field": "name.fmr_trig",
-      "mode": "automated",
+      "category": "derived",
+      "has_automated_source": true,
       "value": "documentMetadataTrigMetadata",
       "source": "derive_names(slug, fdmo_suffix)"
     },
     {
       "field": "dct:title",
-      "mode": "elicited",
+      "category": "suggested",
+      "has_automated_source": true,
       "value": "Document",
-      "prompt": "Title"
-    },
-    {
-      "field": "dct:description",
-      "mode": "elicited",
-      "value": "",
-      "prompt": "Description"
-    },
-    {
-      "field": "dct:license",
-      "mode": "elicited",
-      "value": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "prompt": "License menu: CC0 1.0 (public domain dedication)"
+      "source": "filename stem, title-cased (placeholder)"
     },
     {
       "field": "fdof:hasInformationObjectType",
-      "mode": "elicited",
+      "category": "suggested",
+      "has_automated_source": true,
       "value": "https://w3id.org/fdof/types#Article",
-      "prompt": "IO-type menu: Document"
+      "source": "registry FDIO suggestion for application/pdf (exact)"
+    },
+    {
+      "field": "dct:description",
+      "category": "user_only",
+      "has_automated_source": false,
+      "value": "",
+      "source": "no automated source"
+    },
+    {
+      "field": "dct:license",
+      "category": "user_only",
+      "has_automated_source": false,
+      "value": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "no automated source (menu default is an arbitrary constant)"
     },
     {
       "field": "fdo.create_metametadata",
-      "mode": "elicited",
+      "category": "structural",
+      "has_automated_source": false,
       "value": "False",
-      "prompt": "Create metadata-of-metadata toggle (off by default)"
+      "source": "metadata-of-metadata toggle (off by default)"
     },
     {
       "field": "type_record.fallback_count",
-      "mode": "automated",
+      "category": "metric",
       "value": "0",
       "source": "count of objects whose /type fell back to FDOF-O supertype or a stub (vocabulary-coverage metric)"
     }
